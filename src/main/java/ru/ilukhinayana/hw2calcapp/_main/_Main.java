@@ -44,7 +44,7 @@ public class _Main {
                 ResultWriterService.resultWriter(number1, number2, resultation, "умножение");
                 break;
             default:
-                System.out.print("Выбрана неправильная операия...");
+                System.out.print("Выбрана неправильная операия..."); // Бесполезно, но канонично
         }
 
     }
