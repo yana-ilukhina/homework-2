@@ -1,39 +1,33 @@
 package ru.ilukhinayana.hw2calcapp._main;
 
 import ru.ilukhinayana.hw2calcapp.service.ResultWriterService;
+import ru.ilukhinayana.hw2calcapp.service.UserGreeting;
 import ru.ilukhinayana.hw2calcapp.util.Calculator;
 
 import java.util.Scanner;
 
 public class _Main {
-    public static void main(String[] args){
-        System.out.println("Здравствуй, пользователь! \nЭто приложение Калькулятор \n");
-        System.out.println("Калькулятор может:\n1. Сложить (+) два числа\n" +
-                "2. Вычисть (-) из одного числа другое\n3. Умножить (*) два числа\n");
-        System.out.println("Этот калькулятор может работать с нецелыми числами, " +
-                "правильная запись \"с запятой\", например: 10,5\n");
-        System.out.print("Введи символ операции (+ или - или *), которую хочешь совершить: ");
-
+    public static void main(String[] args) {
+        UserGreeting.greeting();
         Scanner scan = new Scanner(System.in);
-        char operation = scan.next().charAt(0);
-
-        while ((operation != '+') && (operation != '-') && (operation != '*')) {
-            System.out.print("\nТакой операции нет! Повторите ввод операции (+ или - или *): ");
+        char operation;
+        //= scan.next().charAt(0);
+        do {
             operation = scan.next().charAt(0);
-        }
+            if ((operation != '+') && (operation != '-') && (operation != '*')) {
+                System.out.print("Такой операции нет! Повторите ввод операции (+ или - или *): ");
+            }
+        } while ((operation != '+') && (operation != '-') && (operation != '*'));
 
-        System.out.print("\nВведи первое число: ");
+        System.out.print("Введи первое число: ");
         double number1 = scan.nextDouble();
-
         System.out.print("Операция \"" + operation + "\"\nВведи второе число: ");
         double number2 = scan.nextDouble();
-
         double resultation;
-
-        switch (operation){
+        switch (operation) {
             case '+':
-                resultation = Calculator.sum(number1, number2);
-                ResultWriterService.resultWriter(number1, number2, resultation, "сложение");
+                // Можно вызвать метод как аргумент метода, но читаемо ли это?
+                ResultWriterService.resultWriter(number1, number2, Calculator.sum(number1, number2), "сложение");
                 break;
             case '-':
                 resultation = Calculator.subtract(number1, number2);
@@ -46,6 +40,5 @@ public class _Main {
             default:
                 System.out.print("Выбрана неправильная операия..."); // Бесполезно, но канонично
         }
-
     }
 }
